@@ -30,13 +30,13 @@ $('#map_canvas').gmap().bind('init', function(evt, map) {
 $.ajax({
     url: 'http://cadmuslab.com/weather/_cmd',
     type:'POST',
-    dataType: 'json',
+   dataType: 'text',
     crossDomain : true,
     data: {
-        cmd: {
+        cmd: JSON.stringify({
             "geoNear" : "items",
             "near": [6.8590845,79.9800719]
-        }
+        })
     },
     success: function(res) {
         console.log(res);
