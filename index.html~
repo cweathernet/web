@@ -35,7 +35,7 @@ $.ajax({
     data: {
         cmd: {
             "geoNear" : "items",
-            "near": [6.8590845,79.9800719]
+            "near": [6.8590,79.9800719]
         }
     },
     success: function(res) {
