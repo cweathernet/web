@@ -1,9 +1,11 @@
 Template.home.rendered = function() {
+
   GoogleMaps.init({ 'sensor': true, 'libraries': 'places'}, onInitMap );
 };
 
 
 function onInitMap() {
+  var markerClusterer = null;
   var mapOptions = {
     zoom: 13,
     mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -27,6 +29,7 @@ function onInitMap() {
     // For each place, get the icon, place name, and location.
     markers = [];
     var bounds = new google.maps.LatLngBounds();
+    console.log(bounds)
     for (var i = 0, place; place = places[i]; i++) {
       var image = {
         url: place.icon,
@@ -36,15 +39,27 @@ function onInitMap() {
         scaledSize: new google.maps.Size(25, 25)
       };
 
-      // Create a marker for each place.
-      var marker = new google.maps.Marker({
-        map: map,
-        icon: image,
-        title: place.name,
-        position: place.geometry.location
-      });
 
-      markers.push(marker);
+
+      var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: 'Hello World!'
+        });
+
+      // Create a marker for each place.
+      // var marker = new google.maps.Marker({
+      //   map: map,
+      //   icon: image,
+      //   title: place.name,
+      //   position: place.geometry.location
+      // });
+
+      // markers.push(marker);
+
+      // markerClusterer = new MarkerClusterer(map, markers);
 
       bounds.extend(place.geometry.location);
     }
