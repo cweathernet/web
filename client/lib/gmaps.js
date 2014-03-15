@@ -13,7 +13,9 @@ Gmaps.prototype.init = function() {
       mapTypeId: this.options.mapTypeId 
   };
   this.map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions); 
-  this.map.setCenter(new google.maps.LatLng( 35.363556, 138.730438 ));
+  var newyork = {lat: 40.69847032728747, lng: -73.9514422416687};
+  this.setCenter(newyork.lat, newyork.lng); //hardcoded this value to prevent show a empty map area, we need a work around here
+  this.showCurrentLocation();
 
   var input = (document.getElementById(this.inputElId));
 
@@ -23,8 +25,17 @@ Gmaps.prototype.init = function() {
   google.maps.event.addListener(this.searchBox, 'places_changed', this._placeChanged.bind(this))
 };
 
+Gmaps.prototype.showCurrentLocation = function() {
+  var self = this;
+  navigator.geolocation.getCurrentPosition(function(position) {
+    console.log(position)
+    self.setCenter(position.coords.latitude,position.coords.longitude);
+  }, function() {
+    throw new Meteor.Error('getting current location failed')
+  });
+};
 Gmaps.prototype.setCenter = function(lat, lng) {
-  this.map.setCenter(new google.map.LatLng(lat, lng));
+  this.map.setCenter(new google.maps.LatLng(lat, lng));
 };
 
 Gmaps.prototype._placeChanged = function() {
