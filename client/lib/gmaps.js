@@ -13,9 +13,6 @@ Gmaps.prototype.init = function() {
       mapTypeId: this.options.mapTypeId 
   };
   this.map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions); 
-  var newyork = {lat: 40.69847032728747, lng: -73.9514422416687};
-  this.setCenter(newyork.lat, newyork.lng); //hardcoded this value to prevent show a empty map area, we need a work around here
-  this.showCurrentLocation();
 
   var input = (document.getElementById(this.inputElId));
 
@@ -30,6 +27,8 @@ Gmaps.prototype.showCurrentLocation = function() {
   navigator.geolocation.getCurrentPosition(function(position) {
     self.setCenter(position.coords.latitude,position.coords.longitude);
   }, function() {
+    var newyork = {lat: 40.69847032728747, lng: -73.9514422416687};
+    this.setCenter(newyork.lat, newyork.lng);
     throw new Meteor.Error('getting current location failed')
   });
 };
