@@ -4,7 +4,7 @@
     {
       "host": "crowdweather.net",
       "username": "root",
-      "password": ""
+      "password": "nbgfhvvtfzlp"
       //or pem file (ssh based authentication)
       //"pem": "~/.ssh/id_rsa"
     }
