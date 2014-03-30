@@ -28,7 +28,6 @@ Gmaps.prototype.init = function() {
 Gmaps.prototype.showCurrentLocation = function() {
   var self = this;
   navigator.geolocation.getCurrentPosition(function(position) {
-    console.log(position)
     self.setCenter(position.coords.latitude,position.coords.longitude);
   }, function() {
     throw new Meteor.Error('getting current location failed')
